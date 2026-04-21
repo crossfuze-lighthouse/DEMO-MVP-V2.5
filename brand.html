@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#F0F2F7">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Brand | Project Lighthouse | Crossfuze</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#040E3D;--teal:#71F1F7;--green:#8FFFDB;--red:#F65275;--lav:#C0A6FF;--util:#2CB0CD;--purple:#6400EC;--main-bg:#F0F2F7;--sidebar-w:232px;--topbar-h:64px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--main-bg)!important;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;min-height:100vh;color:rgba(4,14,61,0.80);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.25s ease forwards;}
+
+/* Topbar */
+#topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--navy);border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;z-index:200;padding-right:24px;}
+#topbar-brand{width:var(--sidebar-w);flex-shrink:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;padding:0 22px;border-right:1px solid rgba(255,255,255,0.08);height:100%;}
+#topbar-brand img{height:30px}
+#topbar-brand .lh-label{font-size:9px;font-weight:600;letter-spacing:0.38em;text-transform:uppercase;color:rgba(255,255,255,0.50);}
+#topbar-center{flex:1;display:flex;align-items:center;gap:10px;padding:0 24px;}
+#topbar-page-title{font-size:14px;font-weight:600;color:rgba(255,255,255,0.92);}
+.tb-sep{width:1px;height:16px;background:rgba(255,255,255,0.12);}
+#topbar-page-sub{font-size:12px;color:rgba(255,255,255,0.38);}
+.demo-badge{font-size:9px;font-weight:600;padding:3px 10px;border-radius:999px;background:rgba(246,82,117,0.15);color:var(--red);border:1px solid rgba(246,82,117,0.30);letter-spacing:0.05em;text-transform:uppercase;}
+.av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(113,241,247,0.28);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--teal);}
+
+/* Sidebar */
+#sidebar{position:fixed;top:var(--topbar-h);left:0;bottom:0;width:var(--sidebar-w);background:var(--navy);border-right:1px solid rgba(255,255,255,0.07);display:flex;flex-direction:column;z-index:100;overflow-y:auto;}
+#sidebar::-webkit-scrollbar{width:3px;}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(113,241,247,0.15);border-radius:2px;}
+.nav-section{font-size:9px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:16px 20px 5px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;border-left:2px solid transparent;color:rgba(255,255,255,0.45);transition:all 0.15s;text-decoration:none;font-size:12px;font-weight:500;}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.80);border-left-color:rgba(113,241,247,0.25);}
+.nav-item.active{background:rgba(113,241,247,0.08);color:var(--teal);border-left-color:var(--teal);}
+.nav-item.active .nav-icon svg,.nav-item:hover .nav-icon svg{stroke:var(--teal);}
+.nav-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-icon svg{width:14px;height:14px;fill:none;stroke:rgba(255,255,255,0.55);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.15s;}
+.nav-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;}
+.nav-footer{margin-top:auto;padding:14px 20px 20px;font-size:10px;color:rgba(255,255,255,0.28);line-height:1.55;border-top:1px solid rgba(255,255,255,0.05);}
+
+/* Main area */
+#main{margin-top:var(--topbar-h);margin-left:var(--sidebar-w);min-height:calc(100vh - var(--topbar-h));padding:32px 40px 60px;background:var(--main-bg);}
+.inner{max-width:1120px;margin:0 auto;}
+
+/* Page intro */
+.hd{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(4,14,61,0.08);}
+.hd-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+.hd-title{font-size:32px;font-weight:800;letter-spacing:-0.02em;color:var(--navy);margin-bottom:8px;line-height:1.1;}
+.hd-sub{font-size:14.5px;color:rgba(4,14,61,0.65);line-height:1.60;max-width:720px;}
+
+/* Section cards */
+.sec{background:#fff;border:1px solid rgba(4,14,61,0.08);border-radius:12px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 8px -2px rgba(4,14,61,0.05);}
+.sec-hd{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(4,14,61,0.08);}
+.sec-title{font-size:18px;font-weight:700;letter-spacing:-0.01em;color:var(--navy);}
+.sec-sub{font-size:12px;color:rgba(4,14,61,0.50);}
+
+/* Alert banner for non-negotiables */
+.rule-alert{
+  background:linear-gradient(135deg,rgba(246,82,117,0.06) 0%,rgba(100,0,236,0.04) 100%);
+  border:1px solid rgba(246,82,117,0.28);
+  border-left:3px solid var(--red);
+  border-radius:10px;
+  padding:18px 22px;
+  margin-bottom:24px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.rule-alert-icon{width:24px;height:24px;border-radius:50%;background:rgba(246,82,117,0.16);color:var(--red);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;}
+.rule-alert-t{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.rule-alert-d{font-size:12px;color:rgba(4,14,61,0.65);line-height:1.55;}
+
+/* Colour palette swatch grid */
+.pal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+.swatch{border-radius:10px;overflow:hidden;border:1px solid rgba(4,14,61,0.08);background:#fff;display:flex;flex-direction:column;}
+.swatch-chip{height:72px;position:relative;}
+.swatch-chip .hex{position:absolute;bottom:8px;left:12px;font-family:ui-monospace,monospace;font-size:10.5px;font-weight:700;letter-spacing:0.04em;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,0.92);color:var(--navy);}
+.swatch-body{padding:12px 14px;}
+.swatch-name{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.swatch-use{font-size:11px;color:rgba(4,14,61,0.58);line-height:1.45;}
+.swatch-use code{font-family:ui-monospace,monospace;font-size:10px;background:rgba(4,14,61,0.05);padding:1px 5px;border-radius:3px;color:var(--navy);font-weight:600;}
+
+/* Banned colour grid */
+.banned-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.banned{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(246,82,117,0.04);border:1px solid rgba(246,82,117,0.24);border-radius:8px;}
+.banned-chip{width:26px;height:26px;border-radius:5px;border:1px dashed rgba(4,14,61,0.30);flex-shrink:0;position:relative;overflow:hidden;}
+.banned-chip::after{content:'';position:absolute;top:50%;left:-2px;right:-2px;height:1.5px;background:var(--red);transform:rotate(-20deg);}
+.banned-body{flex:1;min-width:0;}
+.banned-hex{font-family:ui-monospace,monospace;font-size:11px;font-weight:700;color:var(--navy);}
+.banned-reason{font-size:10.5px;color:rgba(4,14,61,0.55);margin-top:2px;line-height:1.35;}
+
+/* Typography samples */
+.typo-row{display:grid;grid-template-columns:90px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid rgba(4,14,61,0.06);align-items:baseline;}
+.typo-row:last-child{border-bottom:none;}
+.typo-spec{font-family:ui-monospace,monospace;font-size:10.5px;color:rgba(4,14,61,0.55);font-weight:600;line-height:1.5;}
+.typo-sample-h1{font-size:40px;font-weight:800;color:var(--navy);letter-spacing:-0.025em;line-height:1.1;}
+.typo-sample-h2{font-size:28px;font-weight:700;color:var(--navy);letter-spacing:-0.015em;}
+.typo-sample-h3{font-size:18px;font-weight:700;color:var(--navy);}
+.typo-sample-body{font-size:14.5px;color:var(--navy);line-height:1.60;}
+.typo-sample-small{font-size:12px;color:rgba(4,14,61,0.70);}
+.typo-sample-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);}
+
+/* Logo block */
+.logo-row{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;padding:24px;background:var(--navy);border-radius:10px;margin-bottom:18px;}
+.logo-preview{width:88px;height:88px;display:flex;align-items:center;justify-content:center;}
+.logo-info{color:#F2F2F4;}
+.logo-info-t{font-size:16px;font-weight:700;margin-bottom:4px;}
+.logo-info-d{font-size:12.5px;color:rgba(242,242,244,0.65);line-height:1.55;}
+
+.code-block{background:rgba(4,14,61,0.04);border:1px solid rgba(4,14,61,0.08);border-radius:8px;padding:14px 16px;font-family:ui-monospace,monospace;font-size:11px;line-height:1.60;color:var(--navy);white-space:pre;overflow-x:auto;}
+
+/* Component sample cards */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.comp{background:#fff;border:1px solid rgba(4,14,61,0.08);border-radius:10px;padding:18px;}
+.comp-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(4,14,61,0.48);margin-bottom:12px;}
+.comp-body{display:flex;flex-wrap:wrap;gap:10px;align-items:center;min-height:44px;padding:10px;background:var(--navy);border-radius:6px;}
+.comp-body.light{background:#fff;border:1px solid rgba(4,14,61,0.08);}
+.comp-note{font-size:11px;color:rgba(4,14,61,0.58);margin-top:10px;line-height:1.5;}
+
+/* Sample readiness badges */
+.smp-badge{font-size:10px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:0.05em;}
+.smp-badge.yes{background:rgba(143,255,219,0.18);color:var(--green);border:1px solid rgba(143,255,219,0.32);}
+.smp-badge.cav{background:rgba(192,166,255,0.18);color:var(--lav);border:1px solid rgba(192,166,255,0.32);}
+.smp-badge.no{background:rgba(246,82,117,0.18);color:var(--red);border:1px solid rgba(246,82,117,0.34);}
+.smp-badge.draft{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.70);border:1px solid rgba(255,255,255,0.20);}
+
+/* Sample status dots */
+.smp-dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+.smp-dot.yes{background:var(--green);box-shadow:0 0 6px rgba(143,255,219,0.50);}
+.smp-dot.cav{background:var(--lav);}
+.smp-dot.no{background:var(--red);}
+.smp-dot.draft{background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.30);}
+
+/* Progress bar sample */
+.smp-pb{width:100%;height:8px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden;position:relative;}
+.smp-pb-fill{height:100%;background:linear-gradient(90deg,var(--red) 0%,var(--teal) 100%);border-radius:999px;width:68%;}
+
+/* Sample pill */
+.smp-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:rgba(113,241,247,0.08);border:1px solid rgba(113,241,247,0.22);font-size:11px;font-weight:600;color:var(--teal);letter-spacing:0.01em;}
+
+/* Voice principles */
+.voice-list{list-style:none;padding:0;}
+.voice-item{padding:12px 0;border-bottom:1px solid rgba(4,14,61,0.06);display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:flex-start;}
+.voice-item:last-child{border-bottom:none;}
+.voice-icon{color:var(--green);font-size:16px;font-weight:800;line-height:1;}
+.voice-item.neg .voice-icon{color:var(--red);}
+.voice-t{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+.voice-d{font-size:12px;color:rgba(4,14,61,0.65);line-height:1.55;}
+
+/* Variant note */
+.variant-note{background:rgba(113,241,247,0.06);border:1px solid rgba(113,241,247,0.28);border-left:3px solid var(--teal);border-radius:10px;padding:18px 22px;margin-bottom:0;}
+.variant-note-t{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:-0.005em;}
+.variant-note-d{font-size:12px;color:rgba(4,14,61,0.68);line-height:1.60;}
+.variant-note-d code{font-family:ui-monospace,monospace;font-size:10.5px;background:rgba(4,14,61,0.06);padding:1px 6px;border-radius:3px;color:var(--navy);font-weight:600;}
+
+/* Rules list (build conventions) */
+.rules{display:grid;gap:8px;}
+.rule{display:grid;grid-template-columns:20px 1fr;gap:10px;padding:10px 14px;background:rgba(4,14,61,0.02);border:1px solid rgba(4,14,61,0.06);border-radius:7px;font-size:12.5px;color:rgba(4,14,61,0.78);line-height:1.55;}
+.rule-num{font-family:ui-monospace,monospace;font-weight:700;color:var(--util);font-size:11px;padding-top:1px;}
+.rule code{font-family:ui-monospace,monospace;font-size:11px;background:rgba(4,14,61,0.06);padding:1px 5px;border-radius:3px;color:var(--navy);font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div id="topbar">
+  <a id="topbar-brand" href="index.html" style="text-decoration:none;">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAgCAMAAAAUsaRiAAAAflBMVEX///8AAAAgJjxkZGSCgoLAwMCEhISjo6Pi4uIBCSUoKCjo6OiLi4t3d3fT09NMUmdbYXY1OU3Y2NgzMzO6ursvNEqws7wCAAD6+vq8vr69v8dkaH0VHDY8QVWYm6Rwc4VdX2sAAxnJycjy8vKWmaSOkp2sr7iFiJaipq/l5+oJDS3kCX4IAAAAgklEQVQ4jWNgGAVDFDAigAAEUAoGuSVSJBoxagnGVBiXOYtTIUYlobBBXn5eXk5eXGDU81UZCcGxlRUVLLy8vIQLFy4kLCx8//7927dvExISTp48ebl16xYYDwqwfv16e3v7lJQU1b5/X49evXp06NChu3fvbt26FeT/06dPnz171r59+zAwMFxeXl4bNmwYf/78uS4uLvr6+oaNjX0dHR2NjY01MzPz8fHx8fHj5+fn6Ojo7+/v6evrY2Njo6uri4aGhvr6+vr6+vr69vb2+vr6+jp4ODg4OTk5NDQ0MDAwMDAwMCAyI4kQCkkpKSgoKC8vJycH" alt="Crossfuze"/>
+    <span class="lh-label">Lighthouse</span>
+  </a>
+  <div id="topbar-center">
+    <span id="topbar-page-title">Brand</span>
+    <div class="tb-sep"></div>
+    <span id="topbar-page-sub">Visual system reference · for anyone touching the portal</span>
+    <span class="demo-badge" style="margin-left:auto;">Demo</span>
+  </div>
+  <div class="av">LB</div>
+</div>
+
+<!-- Sidebar -->
+<nav id="sidebar">
+  <div class="nav-section">Main</div>
+  <a href="index.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span><span class="nav-label">Hub</span></a>
+  <a href="portfolio.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span><span class="nav-label">Portfolio Overview</span></a>
+  <a href="offering.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="nav-label">Offering Detail</span></a>
+
+  <div class="nav-section">Tools</div>
+  <a href="scoring.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span><span class="nav-label">Scoring Session</span></a>
+  <a href="actions.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span class="nav-label">Action Log</span></a>
+
+  <div class="nav-section">Modules</div>
+  <a href="https://crossfuze-lighthouse.github.io/ZOOM/aeo.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="nav-label">AEO Module</span></a>
+  <a class="nav-item" style="opacity:0.35;cursor:default;pointer-events:none;"><span class="nav-icon"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span><span class="nav-label">Outbound</span><span style="font-size:9px;color:rgba(255,255,255,0.25);margin-left:auto;">Soon</span></a>
+  <a class="nav-item" style="opacity:0.35;cursor:default;pointer-events:none;"><span class="nav-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span class="nav-label">Maturity Model</span><span style="font-size:9px;color:rgba(255,255,255,0.25);margin-left:auto;">Soon</span></a>
+  <a href="sales.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><span class="nav-label">Sales View</span></a><a href="sales-portal.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="nav-label">Sales Portal</span><span style="font-size:9px;color:#71F1F7;margin-left:auto;letter-spacing:0.06em;font-weight:700;">AE</span></a>
+  <a href="gtm-assets.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span><span class="nav-label">GTM Assets</span></a>
+  <a href="asset-roadmap.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="nav-label">Asset Roadmap</span></a>
+
+  <div class="nav-section" style="padding-top:12px;">Settings</div>
+  <a href="architecture.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span><span class="nav-label">Architecture</span></a>
+  <a href="lighthouse-architecture.html" class="nav-item"><span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></span><span class="nav-label">Architecture Map</span></a>
+  <a href="brand.html" class="nav-item active"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="0.5" fill="currentColor"/><circle cx="17.5" cy="10.5" r="0.5" fill="currentColor"/><circle cx="8.5" cy="7.5" r="0.5" fill="currentColor"/><circle cx="6.5" cy="12.5" r="0.5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125 0-.926.746-1.688 1.688-1.688h1.996c3.094 0 5.543-2.449 5.543-5.543C22 6.012 17.524 2 12 2z"/></svg></span><span class="nav-label">Brand</span></a>
+
+  <div class="nav-footer">Portal-wide visual system<br>Last updated: Apr 2026</div>
+</nav>
+
+<!-- Main -->
+<main id="main" class="fade-in">
+  <div class="inner">
+
+    <div class="hd">
+      <div class="hd-eyebrow">Settings · Reference</div>
+      <h1 class="hd-title">Brand</h1>
+      <p class="hd-sub">Canonical visual system for Project Lighthouse. Use this page as the source of truth when building new portal pages, editing existing ones, or producing any downstream asset. Any deviation is drift — check here first.</p>
+    </div>
+
+    <div class="rule-alert">
+      <div class="rule-alert-icon">!</div>
+      <div>
+        <div class="rule-alert-t">Absolute rules — non-negotiable</div>
+        <div class="rule-alert-d">Never invent data · Never use off-brand colours · Never write content ungrounded in confirmed facts · Always audit every file for brand compliance before publishing · Accurate and honest only — flag gaps explicitly rather than fill them.</div>
+      </div>
+    </div>
+
+    <!-- ═══ COLOUR PALETTE ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Colour palette</div>
+        <div class="sec-sub">Eight approved colours · full opacity for body text</div>
+      </div>
+
+      <div class="pal-grid">
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#040E3D;"><span class="hex">#040E3D</span></div>
+          <div class="swatch-body"><div class="swatch-name">Midnight Blue</div><div class="swatch-use">Primary background. Always on <code>html</code>, <code>body</code>, and inline on the <code>&lt;html&gt;</code> tag.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#8FFFDB;"><span class="hex">#8FFFDB</span></div>
+          <div class="swatch-body"><div class="swatch-name">Bright Green</div><div class="swatch-use">Primary accent. Active states, confirmed readiness.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#71F1F7;"><span class="hex">#71F1F7</span></div>
+          <div class="swatch-body"><div class="swatch-name">Bright Blue / Teal</div><div class="swatch-use">Secondary accent. Lighthouse logo stroke. Active nav.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#2CB0CD;"><span class="hex">#2CB0CD</span></div>
+          <div class="swatch-body"><div class="swatch-name">Utility Blue</div><div class="swatch-use">UI elements, secondary data points.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#6400EC;"><span class="hex">#6400EC</span></div>
+          <div class="swatch-body"><div class="swatch-name">Purple</div><div class="swatch-use">Tertiary accent, in-progress / prioritized states.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#C0A6FF;"><span class="hex">#C0A6FF</span></div>
+          <div class="swatch-body"><div class="swatch-name">Lavender</div><div class="swatch-use">Supporting, pending / caveat states.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#F65275;"><span class="hex">#F65275</span></div>
+          <div class="swatch-body"><div class="swatch-name">Callout Red</div><div class="swatch-use">Authority elements, gap indicators, progress-bar start.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-chip" style="background:#F2F2F4;border:1px solid rgba(4,14,61,0.08);"><span class="hex">#F2F2F4</span></div>
+          <div class="swatch-body"><div class="swatch-name">Crisp Grey</div><div class="swatch-use">All body text on dark. <code>full opacity only</code></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:22px;padding-top:18px;border-top:1px solid rgba(4,14,61,0.08);display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(4,14,61,0.48);margin-bottom:8px;">Progress bar gradient</div>
+          <div class="smp-pb"><div class="smp-pb-fill"></div></div>
+          <div style="font-size:11px;color:rgba(4,14,61,0.58);margin-top:8px;font-family:ui-monospace,monospace;">#F65275 → #71F1F7 · left to right, always</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(4,14,61,0.48);margin-bottom:8px;">Supporting rules</div>
+          <div style="font-size:11.5px;color:rgba(4,14,61,0.70);line-height:1.6;">Hover backgrounds: <code style="font-family:ui-monospace,monospace;font-size:10px;background:rgba(4,14,61,0.05);padding:1px 5px;border-radius:3px;">#F2F2F4</code><br>Dark text on light: <code style="font-family:ui-monospace,monospace;font-size:10px;background:rgba(4,14,61,0.05);padding:1px 5px;border-radius:3px;">rgba(4,14,61,x)</code></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BANNED COLOURS ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Banned colours</div>
+        <div class="sec-sub">Never use these values anywhere in the portal</div>
+      </div>
+
+      <div class="banned-grid">
+        <div class="banned"><div class="banned-chip" style="background:#071530;"></div><div class="banned-body"><div class="banned-hex">#071530</div><div class="banned-reason">Close-to-navy — causes drift from <code style="font-family:ui-monospace,monospace;font-size:9px;">#040E3D</code></div></div></div>
+        <div class="banned"><div class="banned-chip" style="background:#8A9CC4;"></div><div class="banned-body"><div class="banned-hex">#8A9CC4</div><div class="banned-reason">Off-brand muted blue, never used</div></div></div>
+        <div class="banned"><div class="banned-chip" style="background:#A855F7;"></div><div class="banned-body"><div class="banned-hex">#A855F7</div><div class="banned-reason">Wrong purple — use <code style="font-family:ui-monospace,monospace;font-size:9px;">#6400EC</code></div></div></div>
+        <div class="banned"><div class="banned-chip" style="background:#EDF2FF;"></div><div class="banned-body"><div class="banned-hex">#EDF2FF</div><div class="banned-reason">Invented light tint</div></div></div>
+        <div class="banned"><div class="banned-chip" style="background:#F5F7FB;"></div><div class="banned-body"><div class="banned-hex">#F5F7FB</div><div class="banned-reason">Invented light tint — use <code style="font-family:ui-monospace,monospace;font-size:9px;">#F2F2F4</code></div></div></div>
+        <div class="banned"><div class="banned-chip" style="background:#F59E0B;"></div><div class="banned-body"><div class="banned-hex">#F59E0B</div><div class="banned-reason">Amber / warning yellow — not in palette</div></div></div>
+        <div class="banned"><div class="banned-chip" style="background:#FFC860;"></div><div class="banned-body"><div class="banned-hex">#FFC860</div><div class="banned-reason">Invented gold, never used</div></div></div>
+      </div>
+
+      <div style="margin-top:18px;font-size:12px;color:rgba(4,14,61,0.62);line-height:1.6;">
+        <strong style="color:var(--navy);">Also banned:</strong> any invented grey, any <code style="font-family:ui-monospace,monospace;font-size:10px;">color-mix()</code> CSS (causes rendering failures across browsers). Audit every new file via <code style="font-family:ui-monospace,monospace;font-size:10px;">grep -oEi</code> before publishing.
+      </div>
+    </div>
+
+    <!-- ═══ TYPOGRAPHY ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Typography</div>
+        <div class="sec-sub">Inter as system font · Source Sans Pro in downstream assets</div>
+      </div>
+
+      <div class="typo-row">
+        <div class="typo-spec">H1 · 40 / 800<br>-0.025em</div>
+        <div class="typo-sample-h1">Project Lighthouse</div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-spec">H2 · 28 / 700<br>-0.015em</div>
+        <div class="typo-sample-h2">Offering Detail</div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-spec">H3 · 18 / 700</div>
+        <div class="typo-sample-h3">Section heading</div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-spec">Body · 14.5 / 400<br>1.60 line-height</div>
+        <div class="typo-sample-body">Body text for paragraphs and prose. Always full opacity when on dark background — partial opacity on body text causes readability problems.</div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-spec">Small · 12 / 400</div>
+        <div class="typo-sample-small">Supporting captions, metadata, timestamps.</div>
+      </div>
+      <div class="typo-row">
+        <div class="typo-spec">Eyebrow · 11 / 700<br>0.18em · uppercase</div>
+        <div class="typo-sample-eyebrow">Section label</div>
+      </div>
+
+      <div style="margin-top:22px;padding-top:16px;border-top:1px solid rgba(4,14,61,0.08);font-size:12px;color:rgba(4,14,61,0.62);line-height:1.6;">
+        <strong style="color:var(--navy);">Note on Source Sans Pro:</strong> used in downstream assets (Word docs, PDFs, decks). Bold for titles, Regular for body. In-portal we use Inter (Google Fonts) for rendering speed and hinting at small sizes.
+      </div>
+    </div>
+
+    <!-- ═══ LOGO ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Logo — Lighthouse mark</div>
+        <div class="sec-sub">Stroke colour: teal <code style="font-family:ui-monospace,monospace;font-size:10px;">#71F1F7</code> · always</div>
+      </div>
+
+      <div class="logo-row">
+        <div class="logo-preview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#71F1F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" width="88" height="88">
+            <polygon points="9.5,6 12,2.5 14.5,6" fill="rgba(113,241,247,0.15)"/>
+            <rect x="9.5" y="6" width="5" height="3" fill="rgba(113,241,247,0.15)"/>
+            <path d="M9.5 9 L8 20 L16 20 L14.5 9Z" fill="rgba(113,241,247,0.08)"/>
+            <line x1="8.3" y1="13" x2="15.7" y2="13" stroke="rgba(113,241,247,0.4)"/>
+            <line x1="8" y1="17" x2="16" y2="17" stroke="rgba(113,241,247,0.4)"/>
+            <line x1="8" y1="20" x2="16" y2="20"/>
+            <line x1="7" y1="22.5" x2="17" y2="22.5"/>
+            <line x1="12" y1="2.5" x2="12" y2="1" stroke-width="1.2"/>
+            <line x1="9.5" y1="3.5" x2="8.2" y2="2.2" stroke-width="1.2"/>
+            <line x1="14.5" y1="3.5" x2="15.8" y2="2.2" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="logo-info">
+          <div class="logo-info-t">Stroke-based, viewBox 0 0 24 24</div>
+          <div class="logo-info-d">No fill on structure. Cap + lantern box use 15% teal fill, tapered tower uses 8% teal fill for depth. Stripes at 40% teal. Never change stroke colour.</div>
+        </div>
+      </div>
+
+      <div class="code-block">&lt;svg viewBox="0 0 24 24" fill="none" stroke="#71F1F7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"&gt;
+  &lt;!-- Cap --&gt;
+  &lt;polygon points="9.5,6 12,2.5 14.5,6" fill="rgba(113,241,247,0.15)"/&gt;
+  &lt;!-- Lantern box --&gt;
+  &lt;rect x="9.5" y="6" width="5" height="3" fill="rgba(113,241,247,0.15)"/&gt;
+  &lt;!-- Tapered tower --&gt;
+  &lt;path d="M9.5 9 L8 20 L16 20 L14.5 9Z" fill="rgba(113,241,247,0.08)"/&gt;
+  &lt;!-- Stripes --&gt;
+  &lt;line x1="8.3" y1="13" x2="15.7" y2="13" stroke="rgba(113,241,247,0.4)"/&gt;
+  &lt;line x1="8" y1="17" x2="16" y2="17" stroke="rgba(113,241,247,0.4)"/&gt;
+  &lt;!-- Base --&gt;
+  &lt;line x1="8" y1="20" x2="16" y2="20"/&gt;
+  &lt;line x1="7" y1="22.5" x2="17" y2="22.5"/&gt;
+  &lt;!-- Light rays --&gt;
+  &lt;line x1="12" y1="2.5" x2="12" y2="1"/&gt;
+  &lt;line x1="9.5" y1="3.5" x2="8.2" y2="2.2"/&gt;
+  &lt;line x1="14.5" y1="3.5" x2="15.8" y2="2.2"/&gt;
+&lt;/svg&gt;</div>
+    </div>
+
+    <!-- ═══ COMPONENTS ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Components</div>
+        <div class="sec-sub">Core patterns reused across the portal</div>
+      </div>
+
+      <div class="comp-grid">
+        <div class="comp">
+          <div class="comp-label">Readiness badges · dark</div>
+          <div class="comp-body">
+            <span class="smp-badge yes">Sales Ready</span>
+            <span class="smp-badge cav">Ready with caveats</span>
+            <span class="smp-badge no">Blocked</span>
+            <span class="smp-badge draft">Draft</span>
+          </div>
+          <div class="comp-note">Yes = green · caveats = lavender · no = red · draft = grey. Use on navy backgrounds.</div>
+        </div>
+
+        <div class="comp">
+          <div class="comp-label">Status dots</div>
+          <div class="comp-body">
+            <span class="smp-dot yes"></span>
+            <span class="smp-dot cav"></span>
+            <span class="smp-dot no"></span>
+            <span class="smp-dot draft"></span>
+          </div>
+          <div class="comp-note">Used in lists, navigation, and inline next to offering names.</div>
+        </div>
+
+        <div class="comp">
+          <div class="comp-label">Progress bar</div>
+          <div class="comp-body"><div class="smp-pb"><div class="smp-pb-fill"></div></div></div>
+          <div class="comp-note">Always red → teal gradient. Left to right. No other directions.</div>
+        </div>
+
+        <div class="comp">
+          <div class="comp-label">Pill · teal outline</div>
+          <div class="comp-body">
+            <span class="smp-pill">Related · SMART ITSM</span>
+          </div>
+          <div class="comp-note">For navigation pills and tag chips on dark backgrounds.</div>
+        </div>
+
+        <div class="comp">
+          <div class="comp-label">Eyebrow · on light</div>
+          <div class="comp-body light">
+            <span class="typo-sample-eyebrow">Section label</span>
+          </div>
+          <div class="comp-note">Uppercase, 0.18em tracking. Purple on light; teal on dark.</div>
+        </div>
+
+        <div class="comp">
+          <div class="comp-label">Demo badge</div>
+          <div class="comp-body">
+            <span class="demo-badge">Demo</span>
+          </div>
+          <div class="comp-note">Always visible in topbar to signal non-live data.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BUILD CONVENTIONS ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Build conventions</div>
+        <div class="sec-sub">Technical rules for new portal pages</div>
+      </div>
+
+      <div class="rules">
+        <div class="rule"><span class="rule-num">01</span><span>Self-contained HTML — vanilla JS or React. No build steps, no external dependencies except Google Fonts.</span></div>
+        <div class="rule"><span class="rule-num">02</span><span>Apply <code>background:#040E3D !important</code> on both <code>html</code> and <code>body</code>. Also inline <code>style="background:#040E3D"</code> on the <code>&lt;html&gt;</code> tag for downloaded files.</span></div>
+        <div class="rule"><span class="rule-num">03</span><span>Never use <code>color-mix()</code> CSS — causes rendering failures.</span></div>
+        <div class="rule"><span class="rule-num">04</span><span>Body text: <code>#F2F2F4</code> at full opacity only. Never partial opacity for body copy.</span></div>
+        <div class="rule"><span class="rule-num">05</span><span>Audit every file before publishing: <code>grep -oEi '#071530|#8A9CC4|#A855F7|#EDF2FF|#F5F7FB|#F59E0B|color-mix'</code> — zero matches expected.</span></div>
+        <div class="rule"><span class="rule-num">06</span><span>Callout Red <code>#F65275</code> scoped to authority elements, gap indicators, and progress-bar starts — never decorative.</span></div>
+        <div class="rule"><span class="rule-num">07</span><span>All progress bars: <code>#F65275 → #71F1F7</code> gradient, left to right.</span></div>
+        <div class="rule"><span class="rule-num">08</span><span>Hover backgrounds: <code>#F2F2F4</code>. Dark text on light: <code>rgba(4,14,61,x)</code>.</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ PORTAL VARIANTS ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Portal variants</div>
+        <div class="sec-sub">Intentional divergence — not drift</div>
+      </div>
+
+      <div class="variant-note">
+        <div class="variant-note-t">Main portal (10 pages)</div>
+        <div class="variant-note-d">Dark-on-dark pattern. Navy background with translucent cards, teal accents, dark sidebar nav. Covers: <code>index.html</code>, <code>portfolio.html</code>, <code>offering.html</code>, <code>scoring.html</code>, <code>actions.html</code>, <code>sales.html</code>, <code>gtm-assets.html</code>, <code>asset-roadmap.html</code>, <code>architecture.html</code>, <code>lighthouse-architecture.html</code>.</div>
+      </div>
+
+      <div class="variant-note" style="margin-top:10px;">
+        <div class="variant-note-t">Sales Portal · AE (standalone)</div>
+        <div class="variant-note-d">Intentionally different. Scrollable multi-section product-page pattern — alternating light and dark sections, white hero cards, full-bleed layout. Covers: <code>sales-portal.html</code> only. <strong style="color:var(--navy);">Do not propagate this pattern to main portal pages.</strong></div>
+      </div>
+
+      <div class="variant-note" style="margin-top:10px;">
+        <div class="variant-note-t">Sales View (bridge page)</div>
+        <div class="variant-note-d">Light theme exception within main portal. <code>sales.html</code> uses a light background (<code>#F0F2F7</code>) to bridge the dark ops portal with the white AE-facing content model — this is the only main portal page that does this.</div>
+      </div>
+    </div>
+
+    <!-- ═══ VOICE PRINCIPLES ═══ -->
+    <div class="sec">
+      <div class="sec-hd">
+        <div class="sec-title">Voice principles</div>
+        <div class="sec-sub">How content reads across the portal</div>
+      </div>
+
+      <ul class="voice-list">
+        <li class="voice-item"><span class="voice-icon">✓</span><div><div class="voice-t">Evidence-gated</div><div class="voice-d">No credit without proof. Placeholder language only where data is genuinely absent — mark it "pending" or "awaiting", not invented.</div></div></li>
+        <li class="voice-item"><span class="voice-icon">✓</span><div><div class="voice-t">Direct and specific</div><div class="voice-d">Short sentences. Concrete nouns. Numbers where meaningful. Flag what's confirmed vs what's pending.</div></div></li>
+        <li class="voice-item"><span class="voice-icon">✓</span><div><div class="voice-t">Honest about gaps</div><div class="voice-d">Unverified states shown as "Unverified / Awaiting score" — never backfilled with invented values.</div></div></li>
+        <li class="voice-item neg"><span class="voice-icon">✗</span><div><div class="voice-t">No invented KPIs, placeholder scores, filler text</div><div class="voice-d">If a number, label, colour, or fact isn't confirmed — stop. Ask. Flag the gap.</div></div></li>
+        <li class="voice-item neg"><span class="voice-icon">✗</span><div><div class="voice-t">No marketing copy</div><div class="voice-d">This is an internal GTM tool, not a sales website. Labels come from the framework — not from persuasion.</div></div></li>
+        <li class="voice-item neg"><span class="voice-icon">✗</span><div><div class="voice-t">No invented customer names or proof points</div><div class="voice-d">Reference customers must come from Crossfuze's published case studies or internally confirmed references. Stellantis is internal-only — confirm with Jes before naming externally.</div></div></li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>
